@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Title</title>
+        <meta charset="utf-8">
+        <script src="./lib/angular/angular.min.js"></script>
+        <script src="./lib/angular/angular-route.js"></script>
+
+        <script src="./FrontEmploy.js"></script>
+        <script>
+            const backendData = <%{ employ }%>;
+            console.log("backendData", backendData)
+        </script>
+
+        <script>
+            const app = angular.module( 'main', ['ngRoute'] );
+            app.config( function( $routeProvider ) 
+            {
+                $routeProvider.when( "/user", { templateUrl: "public/html/user.html" } );
+                $routeProvider.when( "/job", { templateUrl: "public/html/job.html" } );
+                $routeProvider.when( "/task", { templateUrl: "public/html/task.html" } );
+                $routeProvider.when( "/schedule", { templateUrl: "public/html/schedule.html" } );
+            });
+            app.run( function( $rootScope, $http, $route, $location, $window ) 
+            { 
+                Employ.initialise( backendData );
+            });
+
+        </script>
+
+        <script src="js/user.js"></script>
+    </head>
+    <body id = "body-main" class = "hold-transition skin-black sidebar-mini fixed " ng-app = "main">
+        <div ng-controller="userController">
+            <button ng-click="postData()">frontkeback</button>
+            <!-- <label>Homepage:</label>
+            <input type="text" ng-model="yourName" placeholder="Enter a name here">
+            <hr>
+            <h1>Hello {{yourName}}!</h1>
+            <h2>Hello <% employ.users[1601978432428].id %></h2> -->
+        </div>
+    </body>
+</html>
